@@ -51,7 +51,7 @@ h3 { font-size: clamp(1.5rem, 2vw, 2rem); }
 p { font-size: 1.125rem; color: var(--text-secondary); }
 
 .text-gradient {
-  background: linear-gradient(90deg, #60a5fa, #c084fc);
+  background: linear-gradient(90deg, #60a5fa, #c084fc, #fbbf24);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -301,4 +301,94 @@ footer {
   .nav-links { display: none; } /* Simplified for prototype */
   .footer-grid, .grid-3, .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
   h1 { font-size: 3rem; }
+}
+
+/* Marquee for Clients */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  display: flex;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 2rem 0;
+}
+
+.marquee-content {
+  display: inline-flex;
+  animation: scroll 30s linear infinite;
+  gap: 4rem;
+  padding-left: 4rem;
+}
+
+.marquee-content span {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+.marquee-content span:hover {
+  opacity: 1;
+  color: #fff;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Tool Badges */
+.tools-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.tool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.tool-badge:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Glowing Orb for Hero */
+.glow-orb {
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translateY(-50%);
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.08) 0%, rgba(192, 132, 252, 0.05) 40%, rgba(251, 191, 36, 0.03) 70%, transparent 100%);
+  filter: blur(80px);
+  z-index: -1;
+  border-radius: 50%;
+  animation: pulse-glow 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% { transform: translateY(-50%) scale(1); opacity: 0.8; }
+  100% { transform: translateY(-50%) scale(1.1); opacity: 1; }
+}
+
+.text-gold {
+  color: #fbbf24;
 }
