@@ -301,6 +301,8 @@ footer {
   .nav-links { display: none; } /* Simplified for prototype */
   .footer-grid, .grid-3, .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
   h1 { font-size: 3rem; }
+  .btn { width: 100%; text-align: center; padding: 0.8rem 1rem; font-size: 0.95rem; }
+  .hero-btns { flex-direction: column; width: 100%; }
 }
 
 /* Marquee for Clients */
@@ -320,6 +322,18 @@ footer {
   animation: scroll 30s linear infinite;
   gap: 4rem;
   padding-left: 4rem;
+  align-items: center;
+}
+
+.marquee-content img {
+  height: 32px;
+  width: auto;
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+.marquee-content img:hover {
+  opacity: 1;
 }
 
 .marquee-content span {
@@ -353,20 +367,31 @@ footer {
 .tool-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.4rem 0.8rem;
+  padding: 0.5rem;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-color);
   border-radius: 4px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-secondary);
   transition: var(--transition);
+  cursor: pointer;
+}
+
+.tool-badge img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  opacity: 0.8;
+  transition: var(--transition);
+}
+
+.tool-badge:hover img {
+  opacity: 1;
 }
 
 .tool-badge:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  border-color: #fff;
 }
 
 /* Glowing Orb for Hero */
