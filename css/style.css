@@ -358,19 +358,20 @@ footer {
   background: var(--bg-panel);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
-  padding: 2rem 0;
+  padding: 2.5rem 0;
 }
 
 .marquee-content {
-  display: inline-flex;
+  display: flex;
+  width: max-content;
   animation: scroll 30s linear infinite;
   gap: 4rem;
-  padding-left: 4rem;
+  padding-right: 4rem;
   align-items: center;
 }
 
 .marquee-content img {
-  height: 32px;
+  height: 48px;
   width: auto;
   opacity: 0.5;
   transition: var(--transition);
