@@ -450,7 +450,6 @@ footer {
   z-index: -1;
   border-radius: 50%;
   animation: pulse-glow 8s ease-in-out infinite alternate;
-  will-change: transform, opacity;
 }
 
 @keyframes pulse-glow {
