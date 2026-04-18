@@ -77,4 +77,42 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }
     });
   }
+
+  // Hamburger Menu
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+  
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  }
+
+  // Contact Form Submission Intercept
+  const contactForm = document.querySelector(".contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = "Sending...";
+      submitBtn.disabled = true;
+
+      const formData = new FormData(contactForm);
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        window.location.href = "thank-you.html";
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+        alert("There was an error submitting the form. Please try again later.");
+      });
+    });
+  }
 });
