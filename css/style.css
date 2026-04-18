@@ -448,11 +448,11 @@ footer {
   transform: translateY(-50%);
   width: 50vw;
   height: 50vw;
-  background: radial-gradient(circle, rgba(96, 165, 250, 0.08) 0%, rgba(192, 132, 252, 0.05) 40%, rgba(251, 191, 36, 0.03) 70%, transparent 100%);
-  filter: blur(80px);
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.15) 0%, rgba(192, 132, 252, 0.1) 20%, rgba(251, 191, 36, 0.05) 50%, transparent 70%);
   z-index: -1;
   border-radius: 50%;
   animation: pulse-glow 8s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 @keyframes pulse-glow {
