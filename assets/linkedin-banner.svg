@@ -1,0 +1,73 @@
+<svg width="1128" height="191" viewBox="0 0 1128 191" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Use system fallbacks that natively look beautiful if Inter fails to download in their specific viewer -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800');
+      .font-inter { font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    </style>
+
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <linearGradient id="bgGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0c10" />
+      <stop offset="100%" stop-color="#020202" />
+    </linearGradient>
+
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.10" />
+      <stop offset="50%" stop-color="#c084fc" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#020202" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <rect width="1128" height="191" fill="url(#bgGlow)" />
+  <circle cx="564" cy="95" r="450" fill="url(#centerGlow)" />
+
+  <g opacity="0.3">
+    <path d="M 0 150 Q 282 100 564 150 T 1128 150" fill="none" stroke="#60a5fa" stroke-width="1.5" opacity="0.5"/>
+    <path d="M 0 170 Q 282 230 564 170 T 1128 170" fill="none" stroke="#c084fc" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- Centered Base Setup -->
+  <g transform="translate(0, 0)">
+    
+    <!-- 1. The Logo & Brand Name perfectly balanced -->
+    <g transform="translate(450, 45)">
+      <rect x="0" y="-8" width="12" height="12" rx="2" fill="#ffffff" />
+      <rect x="16" y="-8" width="12" height="12" rx="2" fill="#ffffff" />
+      <rect x="32" y="-8" width="12" height="12" rx="2" fill="#ffffff" />
+
+      <rect x="0" y="8" width="12" height="12" rx="2" fill="#ffffff" />
+      <rect x="16" y="8" width="12" height="12" rx="2" fill="#ffffff" />
+      <rect x="32" y="8" width="12" height="12" rx="2" fill="#6b7280" />
+
+      <rect x="0" y="24" width="12" height="12" rx="2" fill="#ffffff" />
+      <rect x="16" y="24" width="12" height="12" rx="2" fill="#6b7280" />
+      <rect x="32" y="24" width="12" height="12" rx="2" fill="#374151" />
+
+      <text x="60" y="25" class="font-inter" fill="#ffffff" font-weight="800" font-size="38" letter-spacing="-1.5">Structr</text>
+    </g>
+
+    <!-- 2. The Tagline -->
+    <text x="564" y="115" class="font-inter" fill="#ffffff" font-weight="700" font-size="24" letter-spacing="-0.5" text-anchor="middle">
+      Automate your <tspan fill="url(#textGradient)">workflows.</tspan> Scale your business.
+    </text>
+
+    <!-- 3. The Services -->
+    <text x="564" y="145" class="font-inter" fill="#9ca3af" font-weight="600" font-size="13" letter-spacing="1" text-anchor="middle">
+      INTERNAL WORKFLOWS <tspan fill="#60a5fa"> • </tspan> LEAD GEN PIPELINES <tspan fill="#c084fc"> • </tspan> AI INTEGRATION
+    </text>
+
+    <!-- 4. Website URL (Footer-Style Ribbon Placement) -->
+    <g transform="translate(564, 175)">
+      <text x="0" y="0" class="font-inter" fill="url(#textGradient)" font-weight="800" font-size="15" letter-spacing="2" text-anchor="middle">
+        WWW.STRUCTR.IN
+      </text>
+    </g>
+
+  </g>
+
+</svg>
