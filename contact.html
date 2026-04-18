@@ -103,7 +103,9 @@
         </div>
 
         <div class="card">
-          <form class="contact-form" action="https://script.google.com/macros/s/AKfycbwSB9ix5-I67Lww3lAQAMxnsltTWcaXmqKvLuxilitxYXZ9pECM6XjATDEfMXWsd62T/exec" method="POST">
+          <!-- Hidden iframe to capture the Google Apps Script post response without reloading the page into their JSON view -->
+          <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted) { window.location.href='thank-you.html'; }"></iframe>
+          <form class="contact-form" action="https://script.google.com/macros/s/AKfycbwSB9ix5-I67Lww3lAQAMxnsltTWcaXmqKvLuxilitxYXZ9pECM6XjATDEfMXWsd62T/exec" method="POST" target="hidden_iframe">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
               <div class="form-group">
                 <label for="name">Name</label>

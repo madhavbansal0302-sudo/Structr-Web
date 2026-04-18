@@ -92,35 +92,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
   const contactForm = document.querySelector(".contact-form");
   if (contactForm) {
     contactForm.addEventListener("submit", function(e) {
-      e.preventDefault();
+      // The form will naturally submit to the hidden iframe.
+      // We just update the button UI and set a flag for the iframe's onload handler.
+      window.submitted = true;
       
       const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerText;
       submitBtn.innerText = "Sending...";
       submitBtn.disabled = true;
-
-      const formData = new FormData(contactForm);
-      const searchParams = new URLSearchParams();
-      for (const pair of formData) {
-        searchParams.append(pair[0], pair[1]);
-      }
-
-      fetch(contactForm.action, {
-        method: 'POST',
-        body: searchParams,
-        mode: 'no-cors'
-      })
-      .then(() => {
-        // Since mode is no-cors, we cannot check response.ok
-        // We assume it succeeded if fetch didn't throw a network error
-        window.location.href = "thank-you.html";
-      })
-      .catch(error => {
-        console.error('Error!', error.message);
-        submitBtn.innerText = originalText;
-        submitBtn.disabled = false;
-        alert("There was an error submitting the form. Please try again later.");
-      });
+      
+      // Removed fetch() completely to rely on native HTML form submission to hidden iframe, 
+      // avoiding all CORS issues with Google Apps Script.
     });
   }
 });
