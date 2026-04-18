@@ -100,11 +100,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
       submitBtn.disabled = true;
 
       const formData = new FormData(contactForm);
+      const searchParams = new URLSearchParams();
+      for (const pair of formData) {
+        searchParams.append(pair[0], pair[1]);
+      }
+
       fetch(contactForm.action, {
         method: 'POST',
-        body: formData
+        body: searchParams,
+        mode: 'no-cors'
       })
-      .then(response => {
+      .then(() => {
+        // Since mode is no-cors, we cannot check response.ok
+        // We assume it succeeded if fetch didn't throw a network error
         window.location.href = "thank-you.html";
       })
       .catch(error => {
