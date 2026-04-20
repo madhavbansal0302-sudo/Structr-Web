@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=swap");
+    body {
+      background: #0d1017;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1200px;
+      height: 630px;
+      margin: 0;
+      background-image: radial-gradient(circle at top right, rgba(50, 60, 100, 0.2), transparent 60%),
+                        radial-gradient(circle at bottom left, rgba(80, 50, 80, 0.15), transparent 60%);
+      font-family: 'Inter', sans-serif;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 12px;
+      width: 160px;
+      height: 160px;
+    }
+    .logo-grid span {
+      border-radius: 8px;
+      background-color: #fff;
+    }
+    .logo-grid span:nth-child(6) { background-color: #6b6b6b; }
+    .logo-grid span:nth-child(8) { background-color: #6b6b6b; }
+    .logo-grid span:nth-child(9) { background-color: #2d2d2d; }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .logo-title {
+      color: #fff;
+      font-size: 8rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -4px;
+    }
+    .logo-subtitle {
+      color: #a3a3a3;
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-container">
+    <div class="logo-grid">
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+    <div class="logo-text">
+      <div class="logo-title">Structr</div>
+      <div class="logo-subtitle">Systems. Automation. Scale.</div>
+    </div>
+  </div>
+</body>
+</html>
