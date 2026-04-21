@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J08GS0N4SX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-J08GS0N4SX');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Dynamic Meta Tags Placholder - Populated by JS -->
+  <title>Loading Post... | Structr</title>
+  
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <style>
+    .post-header {
+      padding-top: 10rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 4rem;
+    }
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      align-items: center;
+    }
+    .post-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 2rem;
+      line-height: 1.1;
+    }
+    .post-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .post-tag {
+      font-size: 0.8rem;
+      padding: 0.25rem 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+    .post-featured-image {
+      width: 100%;
+      max-height: 600px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-top: 3rem;
+      border: 1px solid var(--border-color);
+    }
+    .post-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 4rem;
+      position: relative;
+    }
+    @media (max-width: 900px) {
+      .post-layout { grid-template-columns: 1fr; }
+    }
+    .post-content {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: #e5e5e5;
+    }
+    .post-content h2, .post-content h3, .post-content h4 {
+      color: #fff;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      scroll-margin-top: 100px; /* Offset for fixed navbar */
+    }
+    .post-content p {
+      margin-bottom: 1.5rem;
+      color: inherit;
+    }
+    .post-content ul, .post-content ol {
+      margin-bottom: 1.5rem;
+      margin-left: 2rem;
+    }
+    .post-content li {
+      margin-bottom: 0.5rem;
+    }
+    .post-sidebar {
+      position: sticky;
+      top: 120px;
+      align-self: start;
+    }
+    .toc {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .toc h4 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+    .toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .toc li {
+      margin-bottom: 0.75rem;
+    }
+    .toc a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+    .toc a:hover {
+      color: #60a5fa;
+    }
+    .author-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 4rem;
+    }
+    .author-box h4 {
+      margin-bottom: 0.5rem;
+    }
+    .faq-section {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border-color);
+    }
+    .faq-item {
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .faq-question {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .faq-answer {
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #60a5fa;
+      text-decoration: none;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      transition: var(--transition);
+    }
+    .back-link:hover {
+      transform: translateX(-5px);
+    }
+    
+    #loading-state {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--text-secondary);
+    }
+    #error-state {
+      display: none;
+      min-height: 80vh;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    #post-container {
+      display: none; /* Shown by JS once loaded */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <div class="logo-grid">
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+        </div>
+        <div class="logo-text">
+          <div class="logo-title">Structr</div>
+          <div class="logo-subtitle">Systems. Automation. Scale.</div>
+        </div>
+      </a>
+      <div class="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn btn-primary" style="padding: 0.6rem 1.5rem; margin-left: 1rem;">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- States -->
+  <div id="loading-state">
+    <div>Loading Post...</div>
+  </div>
+  
+  <div id="error-state">
+    <div class="container">
+      <h2 style="margin-bottom: 1rem;">Post Not Found</h2>
+      <p style="margin-bottom: 2rem;">The blog post you're looking for doesn't exist or has been removed.</p>
+      <a href="blog.html" class="btn btn-primary">Return to Blog</a>
+    </div>
+  </div>
+
+  <!-- Post Container -->
+  <div id="post-container">
+    <header class="post-header container">
+      <a href="blog.html" class="back-link">← Back to Insights</a>
+      
+      <div class="post-meta">
+        <span id="post-date"></span>
+        <span>•</span>
+        <span id="post-author"></span>
+        <span>•</span>
+        <span id="post-read-time"></span>
+      </div>
+      
+      <h1 id="post-title" class="post-title"></h1>
+      
+      <div id="post-tags" class="post-tags"></div>
+      
+      <img id="post-image" class="post-featured-image" style="display: none;" src="" alt="">
+    </header>
+
+    <section style="padding-top: 0;">
+      <div class="container post-layout">
+        
+        <div class="main-column">
+          <!-- Body Content -->
+          <article id="post-content" class="post-content"></article>
+
+          <!-- FAQ Component -->
+          <div id="faq-container" class="faq-section" style="display: none;">
+            <h2 style="margin-bottom: 2rem;">Frequently Asked Questions</h2>
+            <div id="faq-list"></div>
+          </div>
+          
+          <!-- Author Bio -->
+          <div class="author-box">
+            <h4>About the Author</h4>
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <strong><span id="author-name"></span></strong>
+              <a id="author-url" href="#" style="color: #60a5fa; font-size: 0.9rem; text-decoration: none;">View Profile</a>
+            </div>
+            <p id="author-bio" style="margin-top: 0.5rem;"></p>
+          </div>
+        </div>
+
+        <aside class="post-sidebar">
+          <div class="toc" id="toc-container" style="display: none;">
+            <h4>Table of Contents</h4>
+            <ul id="toc-list"></ul>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col" style="max-width: 300px;">
+          <a href="index.html" class="logo" style="margin-bottom: 1.5rem; display: flex;">
+            <div class="logo-grid" style="width: 24px; height: 24px;">
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span>
+            </div>
+            <div class="logo-text">
+              <div class="logo-title" style="font-size: 1.2rem;">Structr</div>
+            </div>
+          </a>
+          <p style="font-size: 0.9rem;">Empowering businesses globally with cutting-edge AI and automation solutions.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <div class="footer-links">
+            <a href="services.html">Internal Workflows</a>
+            <a href="services.html">Lead Generation</a>
+            <a href="services.html">Knowledge Base AI</a>
+            <a href="services.html">Reporting</a>
+            <a href="services.html">AI Integration</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <div class="footer-links">
+            <a href="about.html">About Us</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <a href="#">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Structr. All rights reserved.</p>
+        <p>Delhi NCR, India</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  
+  <!-- Dynamic Post Loader Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const slug = urlParams.get('slug');
+
+      const loadingState = document.getElementById('loading-state');
+      const errorState = document.getElementById('error-state');
+      const postContainer = document.getElementById('post-container');
+
+      if (!slug) {
+        showError();
+        return;
+      }
+
+      fetch('blogs.json')
+        .then(response => {
+          if (!response.ok) throw new Error("Failed to load posts");
+          return response.json();
+        })
+        .then(blogs => {
+          const post = blogs.find(b => b.slug === slug);
+          if (!post) {
+            showError();
+            return;
+          }
+          renderPost(post);
+        })
+        .catch(err => {
+          console.error(err);
+          showError();
+        });
+
+      function showError() {
+        loadingState.style.display = 'none';
+        errorState.style.display = 'flex';
+      }
+
+      function createMetaTag(type, nameUrlOrProp, content) {
+        if (!content) return;
+        const meta = document.createElement('meta');
+        if (type === 'property') meta.setAttribute('property', nameUrlOrProp);
+        else meta.setAttribute('name', nameUrlOrProp);
+        meta.setAttribute('content', content);
+        document.head.appendChild(meta);
+      }
+
+      function createLinkTag(rel, href) {
+        if (!href) return;
+        const link = document.createElement('link');
+        link.setAttribute('rel', rel);
+        link.setAttribute('href', href);
+        document.head.appendChild(link);
+      }
+
+      function injectSchema(schemaObj) {
+        if (!schemaObj) return;
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(schemaObj);
+        document.head.appendChild(script);
+      }
+
+      function renderPost(post) {
+        // --- 1. INJECT SEO META TAGS ---
+        document.title = `${post.title} | Structr`;
+        
+        createMetaTag('name', 'description', post.metaDescription);
+        
+        let allKeywords = [];
+        if (post.focusKeyword) allKeywords.push(post.focusKeyword);
+        if (post.secondaryKeywords && Array.isArray(post.secondaryKeywords)) {
+          allKeywords = allKeywords.concat(post.secondaryKeywords);
+        }
+        if (allKeywords.length > 0) createMetaTag('name', 'keywords', allKeywords.join(', '));
+        
+        createLinkTag('canonical', post.canonicalUrl);
+        
+        // Open Graph
+        createMetaTag('property', 'og:title', post.ogTitle || post.title);
+        createMetaTag('property', 'og:description', post.ogDescription || post.metaDescription);
+        createMetaTag('property', 'og:url', post.canonicalUrl);
+        createMetaTag('property', 'og:type', 'article');
+        if (post.featuredImage && post.featuredImage.url) {
+          createMetaTag('property', 'og:image', post.featuredImage.url);
+        }
+
+        // Twitter Card
+        createMetaTag('name', 'twitter:card', 'summary_large_image');
+        createMetaTag('name', 'twitter:title', post.ogTitle || post.title);
+        createMetaTag('name', 'twitter:description', post.ogDescription || post.metaDescription);
+        if (post.featuredImage && post.featuredImage.url) {
+          createMetaTag('name', 'twitter:image', post.featuredImage.url);
+        }
+
+        // --- 2. INJECT SCHEMAS ---
+
+        // Article Schema
+        const articleSchema = {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": post.title,
+          "description": post.metaDescription,
+          "author": { 
+             "@type": "Person", 
+             "name": post.author.name, 
+             "url": post.author.url 
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Structr",
+            "url": "https://structr.in",
+            "logo": { "@type": "ImageObject", "url": "https://structr.in/assets/og-image.png" }
+          },
+          "datePublished": post.date,
+          "dateModified": post.lastModified || post.date,
+          "mainEntityOfPage": post.canonicalUrl,
+          "keywords": allKeywords.join(", ")
+        };
+        if (post.featuredImage && post.featuredImage.url) {
+          articleSchema.image = post.featuredImage.url;
+        }
+        injectSchema(articleSchema);
+
+        // FAQ Schema
+        if (post.faq && post.faq.length > 0) {
+          const faqSchema = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": post.faq.map(f => ({
+              "@type": "Question",
+              "name": f.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.answer
+              }
+            }))
+          };
+          injectSchema(faqSchema);
+        }
+
+        // Breadcrumb Schema
+        const breadcrumbSchema = {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://structr.in" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://structr.in/blog.html" },
+            { "@type": "ListItem", "position": 3, "name": post.title, "item": post.canonicalUrl }
+          ]
+        };
+        injectSchema(breadcrumbSchema);
+
+
+        // --- 3. POPULATE DOM CONTENT ---
+        
+        const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
+           year: 'numeric', month: 'long', day: 'numeric'
+        });
+
+        document.getElementById('post-date').textContent = formattedDate;
+        document.getElementById('post-author').textContent = post.author.name;
+        document.getElementById('post-read-time').textContent = post.readTime;
+        document.getElementById('post-title').textContent = post.title;
+
+        // Tags
+        if (post.tags && post.tags.length > 0) {
+          const tagsHtml = post.tags.map(t => `<span class="post-tag">${t}</span>`).join('');
+          document.getElementById('post-tags').innerHTML = tagsHtml;
+        }
+
+        // Featured Image
+        if (post.featuredImage && post.featuredImage.url) {
+          const imgEl = document.getElementById('post-image');
+          imgEl.src = post.featuredImage.url;
+          imgEl.alt = post.featuredImage.alt || post.title;
+          imgEl.style.display = 'block';
+        }
+
+        // Author section
+        document.getElementById('author-name').textContent = post.author.name;
+        document.getElementById('author-bio').textContent = post.author.bio;
+        document.getElementById('author-url').href = post.author.url;
+
+        // Body with auto-generated IDs for TOC
+        const contentBox = document.getElementById('post-content');
+        // We set innerHTML first
+        contentBox.innerHTML = post.body;
+
+        // Find all headings to build TOC and inject IDs
+        const headings = contentBox.querySelectorAll('h2, h3, h4');
+        const tocContainer = document.getElementById('toc-container');
+        const tocList = document.getElementById('toc-list');
+        
+        if (headings.length > 0) {
+          let tocHtml = "";
+          headings.forEach((heading, index) => {
+            // Generate ID if missing
+            if (!heading.id) {
+              const textContent = heading.textContent.toLowerCase()
+                                         .replace(/[^a-z0-9]+/g, '-')
+                                         .replace(/(^-|-$)/g, '');
+              heading.id = `${textContent}-${index}`;
+            }
+            
+            // Nested indent based on level
+            const level = parseInt(heading.tagName.substring(1));
+            const indent = (level - 2) * 15; // h2 = 0px, h3 = 15px
+            
+            tocHtml += `<li style="padding-left: ${indent}px"><a href="#${heading.id}">${heading.textContent}</a></li>`;
+          });
+          tocList.innerHTML = tocHtml;
+          tocContainer.style.display = 'block';
+        }
+
+        // FAQ Section
+        if (post.faq && post.faq.length > 0) {
+          const faqList = document.getElementById('faq-list');
+          let faqHtml = "";
+          post.faq.forEach(f => {
+            faqHtml += `
+              <div class="faq-item">
+                <h3 class="faq-question">${f.question}</h3>
+                <p class="faq-answer">${f.answer}</p>
+              </div>
+            `;
+          });
+          faqList.innerHTML = faqHtml;
+          document.getElementById('faq-container').style.display = 'block';
+        }
+
+        // Flip states
+        loadingState.style.display = 'none';
+        postContainer.style.display = 'block';
+        
+        // Refresh GSAP ScrollTrigger if needed
+        if(typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.refresh();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
