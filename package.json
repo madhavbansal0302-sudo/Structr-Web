@@ -1,0 +1,10 @@
+{
+  "name": "structr-website",
+  "type": "module",
+  "scripts": {
+    "sync": "node sync-blogs.js"
+  },
+  "dependencies": {
+    "@sanity/client": "^6.0.0"
+  }
+}
