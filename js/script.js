@@ -48,34 +48,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
     );
   });
 
-  // Motion Text Horizontal Scroll
-  const motionText = document.getElementById("motion-text");
-  if (motionText) {
-    gsap.to(motionText, {
-      xPercent: -50, // Move left by 50%
-      ease: "none",
-      scrollTrigger: {
-        trigger: motionText.parentElement,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1 // Link animation to scroll bar directly
+  // Premium Line Reveal Animation
+  const revealLines = document.querySelectorAll("#scale-text-anim .reveal-line");
+  if (revealLines.length > 0) {
+    gsap.fromTo(revealLines,
+      { y: "120%", rotation: 3, opacity: 0 },
+      {
+        y: "0%",
+        rotation: 0,
+        opacity: 1,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: "#scale-text-anim",
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
       }
-    });
-  }
-
-  // Scale Text Horizontal Motion
-  const scaleText = document.getElementById("scale-text");
-  if (scaleText) {
-    gsap.to(scaleText, {
-      xPercent: -150, // Move across completely
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".motion-section",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1
-      }
-    });
+    );
   }
 
   // Hamburger Menu
