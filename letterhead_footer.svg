@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 45" width="100%" height="100%">
+  <defs>
+    <linearGradient id="footerLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <!-- Top border -->
+  <rect x="0" y="0" width="794" height="1" fill="#e2e8f0"/>
+  <!-- Centered gradient line -->
+  <rect x="347" y="21" width="100" height="3" rx="1.5" fill="url(#footerLine)"/>
+</svg>

@@ -4,13 +4,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   // Navbar background change on scroll
   const navbar = document.querySelector(".navbar");
+  let isScrolled = false;
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
+    if (window.scrollY > 50 && !isScrolled) {
       navbar.style.background = "rgba(5, 5, 5, 0.95)";
       navbar.style.boxShadow = "0 4px 30px rgba(0, 0, 0, 0.5)";
-    } else {
+      isScrolled = true;
+    } else if (window.scrollY <= 50 && isScrolled) {
       navbar.style.background = "rgba(5, 5, 5, 0.8)";
       navbar.style.boxShadow = "none";
+      isScrolled = false;
     }
   });
 
