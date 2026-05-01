@@ -124,16 +124,6 @@
     .toc a:hover {
       color: #60a5fa;
     }
-    .author-box {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-top: 4rem;
-    }
-    .author-box h4 {
-      margin-bottom: 0.5rem;
-    }
     .faq-section {
       margin-top: 4rem;
       padding-top: 3rem;
@@ -266,15 +256,7 @@
             <div id="faq-list"></div>
           </div>
           
-          <!-- Author Bio -->
-          <div class="author-box">
-            <h4>About the Author</h4>
-            <div style="display: flex; justify-content: space-between; align-items: baseline;">
-              <strong><span id="author-name"></span></strong>
-              <a id="author-url" href="#" style="color: #60a5fa; font-size: 0.9rem; text-decoration: none;">View Profile</a>
-            </div>
-            <p id="author-bio" style="margin-top: 0.5rem;"></p>
-          </div>
+
         </div>
 
         <aside class="post-sidebar">
@@ -513,12 +495,7 @@
           imgEl.style.display = 'block';
         }
 
-        // Author section
-        document.getElementById('author-name').textContent = post.author.name;
-        document.getElementById('author-bio').textContent = post.author.bio;
-        document.getElementById('author-url').href = post.author.url;
-
-        // Body with auto-generated IDs for TOC
+// Body with auto-generated IDs for TOC
         const contentBox = document.getElementById('post-content');
         // We set innerHTML first
         contentBox.innerHTML = post.body;
