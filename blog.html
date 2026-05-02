@@ -19,7 +19,7 @@
   <meta property="og:title" content="Our Insights & Blog | Structr AI">
   <meta property="og:description" content="Insights, updates, and deep dives into AI and systems automation.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://structr.in/blog.html">
+  <meta property="og:url" content="https://structr.in/blog">
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:image" content="https://structr.in/assets/og-image.png">
   <meta name="twitter:image" content="https://structr.in/assets/og-image.png">
@@ -82,7 +82,7 @@
   <!-- Navigation -->
   <nav class="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="logo">
+      <a href="/" class="logo">
         <div class="logo-grid">
           <span></span><span></span><span></span>
           <span></span><span></span><span></span>
@@ -97,12 +97,12 @@
         <span></span><span></span><span></span>
       </div>
       <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="about.html">About</a>
-        <a href="blog.html" class="active">Blog</a>
-        <a href="contact.html">Contact</a>
-        <a href="contact.html" class="btn btn-primary" style="padding: 0.6rem 1.5rem; margin-left: 1rem;">Get Started</a>
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/about">About</a>
+        <a href="/blog" class="active">Blog</a>
+        <a href="/contact">Contact</a>
+        <a href="/contact" class="btn btn-primary" style="padding: 0.6rem 1.5rem; margin-left: 1rem;">Get Started</a>
       </div>
     </div>
   </nav>
@@ -129,7 +129,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col" style="max-width: 300px;">
-          <a href="index.html" class="logo" style="margin-bottom: 1.5rem; display: flex;">
+          <a href="/" class="logo" style="margin-bottom: 1.5rem; display: flex;">
             <div class="logo-grid" style="width: 24px; height: 24px;">
               <span></span><span></span><span></span>
               <span></span><span></span><span></span>
@@ -144,19 +144,19 @@
         <div class="footer-col">
           <h4>Services</h4>
           <div class="footer-links">
-            <a href="services.html">Internal Workflows</a>
-            <a href="services.html">Lead Generation</a>
-            <a href="services.html">Knowledge Base AI</a>
-            <a href="services.html">Reporting</a>
-            <a href="services.html">AI Integration</a>
+            <a href="/services">Internal Workflows</a>
+            <a href="/services">Lead Generation</a>
+            <a href="/services">Knowledge Base AI</a>
+            <a href="/services">Reporting</a>
+            <a href="/services">AI Integration</a>
           </div>
         </div>
         <div class="footer-col">
           <h4>Company</h4>
           <div class="footer-links">
-            <a href="about.html">About Us</a>
-            <a href="blog.html">Blog</a>
-            <a href="contact.html">Contact</a>
+            <a href="/about">About Us</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
             <a href="#">Privacy Policy</a>
           </div>
         </div>
@@ -195,7 +195,7 @@
             });
 
             gridHTML += `
-              <a href="blog-post.html?slug=${post.slug}" class="card blog-card">
+              <a href="/blog-post?slug=${post.slug}" class="card blog-card">
                 ${post.featuredImage?.url ? `<img src="${post.featuredImage.url}" alt="${post.featuredImage.alt}" class="blog-card-img">` : ''}
                 <div class="blog-meta">
                   <span>${formattedDate}</span>
