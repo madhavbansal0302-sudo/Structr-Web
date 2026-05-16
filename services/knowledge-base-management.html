@@ -271,21 +271,19 @@
 
   <script src="../js/script.js"></script>
   <script>
-    // Highlight and scroll to this page's service on load
+    // Instantly position page at the target service — fires before first paint so no visible scroll
     (function() {
       var targetId = 'service-3';
-      var el = document.getElementById(targetId);
-      if (el) {
+      document.addEventListener('DOMContentLoaded', function() {
+        var el = document.getElementById(targetId);
+        if (!el) return;
         el.classList.add('active-service');
-        // Wait for navbar + hero to settle, then smooth scroll
-        window.addEventListener('load', function() {
-          setTimeout(function() {
-            var navHeight = document.querySelector('.navbar') ? document.querySelector('.navbar').offsetHeight : 80;
-            var top = el.getBoundingClientRect().top + window.scrollY - navHeight - 40;
-            window.scrollTo({ top: top, behavior: 'smooth' });
-          }, 400);
-        });
-      }
+        // Instant jump (no animation) — user lands here, never sees a scroll
+        el.scrollIntoView({ behavior: 'instant', block: 'start' });
+        // Pull back a bit for the fixed navbar
+        var navHeight = (document.querySelector('.navbar') || {offsetHeight: 80}).offsetHeight;
+        window.scrollBy(0, -(navHeight + 32));
+      });
     })();
   </script>
 </body>
